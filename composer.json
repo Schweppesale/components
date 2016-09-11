@@ -1,0 +1,16 @@
+{
+    "name": "schweppesale/components",
+    "type": "library",
+    "authors": [
+        {
+            "name": "John Tripi",
+            "email": "tripij1@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Schweppesale\\Components\\": "src/"
+        }
+    }
+}
