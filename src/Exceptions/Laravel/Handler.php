@@ -1,6 +1,6 @@
 <?php
 
-namespace Schweppesale\Components\Exceptions\Laravel;
+namespace Schweppesale\Module\Core\Exceptions\Laravel;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

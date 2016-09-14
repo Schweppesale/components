@@ -1,9 +1,9 @@
 <?php
-namespace Schweppesale\Components\Collections;
+namespace Schweppesale\Module\Core\Collections;
 
 /**
  * Interface HighOrderInterface
- * @package Schweppesale\Components\Collections
+ * @package Schweppesale\Module\Core\Collections
  */
 interface HighOrderInterface {
 

@@ -1,5 +1,5 @@
 <?php
-namespace Schweppesale\Components\Exceptions;
+namespace Schweppesale\Module\Core\Exceptions;
 
 class ApplicationException extends \Exception {
 

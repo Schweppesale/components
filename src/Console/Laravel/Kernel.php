@@ -1,6 +1,6 @@
 <?php
 
-namespace Schweppesale\Components\Console\Laravel;
+namespace Schweppesale\Module\Core\Console\Laravel;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

@@ -1,9 +1,9 @@
 <?php
-namespace Schweppesale\Components\Exceptions;
+namespace Schweppesale\Module\Core\Exceptions;
 
 /**
  * Class InfrastructureException
- * @package Schweppesale\Components\Exceptions
+ * @package Schweppesale\Module\Core\Exceptions
  */
 class InfrastructureException extends \Exception {
 

@@ -1,9 +1,9 @@
 <?php
-namespace Schweppesale\Components\Collections;
+namespace Schweppesale\Module\Core\Collections;
 
 /**
  * Class Collection
- * @package Schweppesale\Components\Collections
+ * @package Schweppesale\Module\Core\Collections
  */
 class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
 

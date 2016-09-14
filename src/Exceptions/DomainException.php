@@ -1,9 +1,9 @@
 <?php
-namespace Schweppesale\Components\Exceptions;
+namespace Schweppesale\Module\Core\Exceptions;
 
 /**
  * Class DomainException
- * @package Schweppesale\Components\Exceptions
+ * @package Schweppesale\Module\Core\Exceptions
  */
 class DomainException extends \Exception {
 
