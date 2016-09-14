@@ -92,4 +92,8 @@ class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
     public function valid() {
         return isset($this->container[$this->position]);
     }
+
+    public function toArray() {
+        return $this->container;
+    }
 }
