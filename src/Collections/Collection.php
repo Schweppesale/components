@@ -5,7 +5,7 @@ namespace Schweppesale\Components\Collections;
  * Class Collection
  * @package Schweppesale\Components\Collections
  */
-class Collection implements \Iterator, HighOrderInterface  {
+class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
 
     /**
      * @var int
@@ -24,6 +24,26 @@ class Collection implements \Iterator, HighOrderInterface  {
     public function __construct(array $data = [])
     {
         $this->container = $data;
+    }
+
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->container);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->container[$offset];
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->container[$offset] = $value;
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
     }
 
     /**
