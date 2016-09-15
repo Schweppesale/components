@@ -1,5 +1,6 @@
 <?php
 namespace Schweppesale\Module\Core\Http\Laravel;
+
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

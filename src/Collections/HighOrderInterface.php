@@ -5,7 +5,8 @@ namespace Schweppesale\Module\Core\Collections;
  * Interface HighOrderInterface
  * @package Schweppesale\Module\Core\Collections
  */
-interface HighOrderInterface {
+interface HighOrderInterface
+{
 
     /**
      * @param callable $function

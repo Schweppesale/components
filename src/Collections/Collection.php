@@ -1,11 +1,15 @@
 <?php
 namespace Schweppesale\Module\Core\Collections;
 
+use ArrayAccess;
+use Iterator;
+
 /**
  * Class Collection
  * @package Schweppesale\Module\Core\Collections
  */
-class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
+class Collection implements Iterator, HighOrderInterface, ArrayAccess
+{
 
     /**
      * @var int
@@ -26,21 +30,36 @@ class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
         $this->container = $data;
     }
 
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->container);
     }
 
+    /**
+     * @param mixed $offset
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         return $this->container[$offset];
     }
 
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
         $this->container[$offset] = $value;
     }
 
+    /**
+     * @param mixed $offset
+     */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -73,27 +92,51 @@ class Collection implements \Iterator, HighOrderInterface, \ArrayAccess {
         return new static(array_filter($this->container, $function));
     }
 
-    public function rewind() {
+    /**
+     * @return void
+     */
+    public function rewind()
+    {
         $this->position = 0;
     }
 
-    public function current() {
+    /**
+     * @return mixed
+     */
+    public function current()
+    {
         return $this->container[$this->position];
     }
 
-    public function key() {
+    /**
+     * @return int
+     */
+    public function key()
+    {
         return $this->position;
     }
 
-    public function next() {
+    /**
+     * @return void
+     */
+    public function next()
+    {
         ++$this->position;
     }
 
-    public function valid() {
+    /**
+     * @return bool
+     */
+    public function valid()
+    {
         return isset($this->container[$this->position]);
     }
 
-    public function toArray() {
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
         return $this->container;
     }
 }
