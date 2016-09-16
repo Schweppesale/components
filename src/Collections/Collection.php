@@ -3,12 +3,13 @@ namespace Schweppesale\Module\Core\Collections;
 
 use ArrayAccess;
 use Iterator;
+use JsonSerializable;
 
 /**
  * Class Collection
  * @package Schweppesale\Module\Core\Collections
  */
-class Collection implements Iterator, HighOrderInterface, ArrayAccess
+class Collection implements Iterator, HighOrderInterface, ArrayAccess, JsonSerializable
 {
 
     /**
@@ -136,6 +137,14 @@ class Collection implements Iterator, HighOrderInterface, ArrayAccess
      * @return array
      */
     public function toArray()
+    {
+        return $this->container;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
     {
         return $this->container;
     }

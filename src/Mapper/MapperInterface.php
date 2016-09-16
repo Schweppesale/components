@@ -11,7 +11,7 @@ interface MapperInterface
     /**
      * @param $source
      * @param $destination
-     * @return object|\object[]
+     * @return mixed
      */
     public function map($source, $destination);
 
@@ -19,7 +19,7 @@ interface MapperInterface
      * @param array $source
      * @param $sourceType
      * @param $destination
-     * @return object|\object[]
+     * @return mixed
      */
     public function mapArray(array $source, $sourceType, $destination);
 
@@ -27,7 +27,7 @@ interface MapperInterface
      * @param Collection $source
      * @param $sourceType
      * @param $destination
-     * @return object|\object[]
+     * @return mixed
      */
     public function mapCollection(Collection $source, $sourceType, $destination);
 }
