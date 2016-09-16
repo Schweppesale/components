@@ -1,5 +1,6 @@
 <?php
 namespace Schweppesale\Module\Core\Mapper;
+
 use Schweppesale\Module\Core\Collections\Collection;
 
 /**

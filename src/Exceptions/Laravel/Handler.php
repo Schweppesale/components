@@ -12,11 +12,6 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
 {
 
     /**
-     * @var array
-     */
-    private $moduleExceptionHandler = [];
-
-    /**
      * A list of the exception types that should not be reported.
      *
      * @var array
@@ -29,6 +24,10 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
+    /**
+     * @var array
+     */
+    private $moduleExceptionHandler = [];
 
     /**
      * @param string $exception
@@ -37,7 +36,7 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
      */
     public function addModuleExceptionHandler(string $exception, callable $handler)
     {
-        if(array_key_exists($exception, $this->moduleExceptionHandler) === true) {
+        if (array_key_exists($exception, $this->moduleExceptionHandler) === true) {
             throw new \RuntimeException("Handler has already been set for " . $exception);
         }
         $this->moduleExceptionHandler[$exception] = $handler;
@@ -66,11 +65,11 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
     public function render($request, Exception $exception)
     {
         $className = get_class($exception);
-        if(array_key_exists($className, $this->moduleExceptionHandler)) {
+        if (array_key_exists($className, $this->moduleExceptionHandler)) {
             return call_user_func_array($this->moduleExceptionHandler[$className], [$request, $exception, app(Response::class)]);
         }
 
-        if($request->wantsJson()) {
+        if ($request->wantsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 

@@ -1,7 +1,8 @@
 <?php
 namespace Schweppesale\Module\Core\Exceptions;
 
-interface ModuleExceptionHandler {
+interface ModuleExceptionHandler
+{
 
     /**
      * @param string $exception
