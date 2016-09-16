@@ -5,9 +5,17 @@ namespace Schweppesale\Module\Core\Exceptions\Laravel;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Schweppesale\Module\Core\Exceptions\ModuleExceptionHandler;
 
-class Handler extends ExceptionHandler
+class Handler extends ExceptionHandler implements ModuleExceptionHandler
 {
+
+    /**
+     * @var array
+     */
+    private $moduleExceptionHandler = [];
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -21,6 +29,19 @@ class Handler extends ExceptionHandler
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
+
+    /**
+     * @param string $exception
+     * @param callable $handler
+     * @return void
+     */
+    public function addModuleExceptionHandler(string $exception, callable $handler)
+    {
+        if(array_key_exists($exception, $this->moduleExceptionHandler) === true) {
+            throw new \RuntimeException("Handler has already been set for " . $exception);
+        }
+        $this->moduleExceptionHandler[$exception] = $handler;
+    }
 
     /**
      * Report or log an exception.
@@ -44,6 +65,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $className = get_class($exception);
+        if(array_key_exists($className, $this->moduleExceptionHandler)) {
+            return call_user_func_array($this->moduleExceptionHandler[$className], [$request, $exception, app(Response::class)]);
+        }
+
+        if($request->wantsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
         return parent::render($request, $exception);
     }
 
