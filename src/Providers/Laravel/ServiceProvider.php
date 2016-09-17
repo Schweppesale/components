@@ -1,5 +1,6 @@
 <?php
 namespace Schweppesale\Module\Core\Providers\Laravel;
+use Schweppesale\Module\Core\Exceptions\ModuleExceptionHandler;
 
 /**
  * Class ServiceProvider
@@ -7,6 +8,15 @@ namespace Schweppesale\Module\Core\Providers\Laravel;
  */
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
+
+    /**
+     * @return ModuleExceptionHandler
+     */
+    public function getExceptionHandler(): ModuleExceptionHandler
+    {
+        return $this->app->make(\Illuminate\Contracts\Debug\ExceptionHandler::class);
+    }
+
     /**
      * Merge the given configuration recursively with the existing configuration.
      *
