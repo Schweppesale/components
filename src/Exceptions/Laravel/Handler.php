@@ -43,19 +43,6 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
     }
 
     /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception $exception
-     * @return void
-     */
-    public function report(Exception $exception)
-    {
-        parent::report($exception);
-    }
-
-    /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request $request
@@ -70,10 +57,23 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
         }
 
         if ($request->wantsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json(['error' => $exception->getMessage()], 401);
         }
 
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Report or log an exception.
+     *
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param  \Exception $exception
+     * @return void
+     */
+    public function report(Exception $exception)
+    {
+        parent::report($exception);
     }
 
     /**
@@ -89,6 +89,6 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest('login');
+        throw new \Schweppesale\Module\Core\Exceptions\Exception($exception->getMessage(), 0, $exception);
     }
 }

@@ -10,6 +10,12 @@ interface HighOrderInterface
 
     /**
      * @param callable $function
+     * @return static
+     */
+    public function filter(callable $function);
+
+    /**
+     * @param callable $function
      * @return Collection
      */
     public function map(callable $function);
@@ -19,10 +25,4 @@ interface HighOrderInterface
      * @return mixed
      */
     public function reduce(callable $function);
-
-    /**
-     * @param callable $function
-     * @return static
-     */
-    public function filter(callable $function);
 }

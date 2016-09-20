@@ -13,14 +13,13 @@ class Collection implements Iterator, HighOrderInterface, ArrayAccess, JsonSeria
 {
 
     /**
-     * @var int
-     */
-    private $position = 0;
-
-    /**
      * @var array
      */
     private $container = [];
+    /**
+     * @var int
+     */
+    private $position = 0;
 
     /**
      * Collection constructor.
@@ -29,6 +28,81 @@ class Collection implements Iterator, HighOrderInterface, ArrayAccess, JsonSeria
     public function __construct(array $data = [])
     {
         $this->container = $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function current()
+    {
+        return $this->container[$this->position];
+    }
+
+    /**
+     * @return int
+     */
+    public function key()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return void
+     */
+    public function next()
+    {
+        ++$this->position;
+    }
+
+    /**
+     * @return void
+     */
+    public function rewind()
+    {
+        $this->position = 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function valid()
+    {
+        return isset($this->container[$this->position]);
+    }
+
+    /**
+     * @param callable $function
+     * @return static
+     */
+    public function filter(callable $function)
+    {
+        return new static(array_filter($this->container, $function));
+    }
+
+    /**
+     * @param callable $function
+     * @return Collection
+     */
+    public function map(callable $function)
+    {
+        return new self(array_map($function, $this->container));
+    }
+
+    /**
+     * @param callable $function
+     * @return mixed
+     */
+    public function reduce(callable $function)
+    {
+        return array_reduce($this->container, $function);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->container;
     }
 
     /**
@@ -67,84 +141,9 @@ class Collection implements Iterator, HighOrderInterface, ArrayAccess, JsonSeria
     }
 
     /**
-     * @param callable $function
-     * @return Collection
-     */
-    public function map(callable $function)
-    {
-        return new self(array_map($function, $this->container));
-    }
-
-    /**
-     * @param callable $function
-     * @return mixed
-     */
-    public function reduce(callable $function)
-    {
-        return array_reduce($this->container, $function);
-    }
-
-    /**
-     * @param callable $function
-     * @return static
-     */
-    public function filter(callable $function)
-    {
-        return new static(array_filter($this->container, $function));
-    }
-
-    /**
-     * @return void
-     */
-    public function rewind()
-    {
-        $this->position = 0;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function current()
-    {
-        return $this->container[$this->position];
-    }
-
-    /**
-     * @return int
-     */
-    public function key()
-    {
-        return $this->position;
-    }
-
-    /**
-     * @return void
-     */
-    public function next()
-    {
-        ++$this->position;
-    }
-
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        return isset($this->container[$this->position]);
-    }
-
-    /**
      * @return array
      */
     public function toArray()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
     {
         return $this->container;
     }

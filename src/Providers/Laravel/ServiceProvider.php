@@ -1,5 +1,6 @@
 <?php
 namespace Schweppesale\Module\Core\Providers\Laravel;
+
 use Schweppesale\Module\Core\Exceptions\ModuleExceptionHandler;
 
 /**
