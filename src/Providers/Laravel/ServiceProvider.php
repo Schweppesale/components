@@ -1,6 +1,7 @@
 <?php
 namespace Schweppesale\Module\Core\Providers\Laravel;
 
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Schweppesale\Module\Core\Exceptions\ModuleExceptionHandler;
 
 /**
@@ -15,7 +16,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function getExceptionHandler(): ModuleExceptionHandler
     {
-        return $this->app->make(\Illuminate\Contracts\Debug\ExceptionHandler::class);
+        return $this->app->make(ExceptionHandler::class);
     }
 
     /**
