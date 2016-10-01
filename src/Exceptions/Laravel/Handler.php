@@ -85,7 +85,8 @@ class Handler extends ExceptionHandler implements ModuleExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
+
+        if ($request->acceptsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
